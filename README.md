@@ -2,9 +2,9 @@
 
 # names of all the members 
 
-Cedric
-Jacob
-Ibraheem
+Cedric,
+Jacob,
+& Ibraheem
 
 ## short description of the project
 
