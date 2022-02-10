@@ -1,5 +1,5 @@
 'use strict';
-
+const axios = require('axios');
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -44,8 +44,8 @@ async function handleGetVideogames(request, response) {
     try {
         const data = await axios.get('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy');
         const item = new TriviaModel(data);
-        await item.save();
-        res.status(200).json(item);
+        // await item.save();
+        response.status(200).json(item);
     } catch (error) {
         console.error(error);
         response.status(500).send('trivia not found.');
