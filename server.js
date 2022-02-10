@@ -42,10 +42,17 @@ async function handleGetVideogames(request, response) {
     //     }
 
     try {
-        const data = await axios.get('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy');
-        const item = new TriviaModel(data);
+        const data = await axios.get('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy')
+        .then(res => {
+            // console.log(res.data);
+            let item = new TriviaModel(res.data);
+            console.log(item);
+            response.status(200).json(res.data);
+        })
+        console.log('data pushing p');
+        // const item = new TriviaModel(res.data);
         // await item.save();
-        response.status(200).json(item);
+        
     } catch (error) {
         console.error(error);
         response.status(500).send('trivia not found.');
