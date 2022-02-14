@@ -22,6 +22,7 @@ app.get('/', (request, response) => {
 app.get('/videogames', handleGetVideogames);
 app.get('/cars', handleGetCars);
 app.get('/sports', handleGetSports);
+app.get('/user', handleGetUser);
 
 async function handleGetVideogames(request, response) {
     try {
@@ -41,5 +42,19 @@ async function handleGetVideogames(request, response) {
         response.status(500).send('Server error.');
     }
 }
+
+function handleGetUser(req, res) {
+    // verifyUser is defined in the auth.js
+    verifyUser(req, (err, user) => {
+      // "error-first" function
+      if (err) {
+        // if there is a problem verifying you
+        res.send('invalid token');
+      } else {
+        // if there is not a problem verifying you
+        res.send(user);
+      }
+    })
+  }
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
